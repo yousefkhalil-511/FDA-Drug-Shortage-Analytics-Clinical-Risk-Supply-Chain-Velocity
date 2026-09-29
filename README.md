@@ -51,22 +51,22 @@ The dataset used in this project is sourced directly from the **U.S. Food and Dr
 
 ```
 ├── drug-shortages-0001-of-0001.json   # Source JSON export from openFDA
-├── import_data.sql                   # SQL script for staging and raw JSON ingestion
-├── create_tables_and_views.sql       # DDL scripts for tables, indexes, and analytical views
-├── drug_shortage_analysis.pbix       # Power BI report file with visual layouts and models
+├── Loading JSON files.sql                   # SQL script for staging and raw JSON ingestion
+├── Drug Shortage Tables.sql       # DDL scripts for tables, indexes, and analytical views
+├── Drug Shortage Analysis & Reports.pbix       # Power BI report file with visual layouts and models
 └── README.md                         # Project documentation and execution guide
 ```
 
 ### File Descriptions
 
 * **`drug-shortages-0001-of-0001.json`**: The complete raw openFDA drug shortages export containing nested product records, dates, and administrative attributes.
-* **`import_data.sql`**: Contains the commands required to ingest the multiline JSON payload into a PostgreSQL `JSONB` staging table via `psql` or native copy techniques.
-* **`create_tables_and_views.sql`**: 
+* **`Loading JSON files.sql`**: Contains the commands required to ingest the multiline JSON payload into a PostgreSQL `JSONB` staging table via `psql` or native copy techniques.
+* **`Drug Shortage Tables.sql`**: 
   * Builds the core `drug_shortages` structured table with appropriate data types (`DATE`, `TEXT[]`, `JSONB`).
   * Establishes B-tree and GIN indexes for performant querying.
-  * Creates `vw_fact_drug_shortages` (with calculated duration, staleness metrics, and risk tier logic).
-  * Creates `vw_dim_therapeutic_category` (unnests multi-value therapeutic categories to prevent M:M join fan-out).
-* **`drug_shortage_analysis.pbix`**: The compiled Power BI report configured with clean dimensional relationships and interactive visual elements across two reporting pages.
+  * Creates `fact_drug_shortages` (with calculated duration, staleness metrics, and risk tier logic).
+  * Creates `dim_therapeutic_category` (unnests multi-value therapeutic categories to prevent M:M join fan-out).
+* **`Drug Shortage Analysis & Reports.pbix`**: The compiled Power BI report configured with clean dimensional relationships and interactive visual elements across two reporting pages.
 
 ---
 
@@ -122,7 +122,7 @@ The analytical report is divided into two distinct executive pages designed for 
 
 ### 3. Power BI Configuration
 
-1. Launch **Power BI Desktop** and open `drug_shortage_analysis.pbix`.
+1. Launch **Power BI Desktop** and open `Drug Shortage Analysis & Reports.pbix`.
 2. Navigate to **Home > Transform Data > Data source settings**.
 3. Point the PostgreSQL connection to your local or remote database server (`localhost:5432`, database: `drug_shortage`).
-4. Click **Apply Changes** to refresh the dataset directly from `vw_fact_drug_shortages` and `vw_dim_therapeutic_category`.
+4. Click **Apply Changes** to refresh the dataset directly from `fact_drug_shortages` and `dim_therapeutic_category`.
