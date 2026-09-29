@@ -1,0 +1,2 @@
+# FDA-Drug-Shortage-Analytics-Clinical-Risk-Supply-Chain-Velocity
+An end-to-end healthcare data pipeline and analytics solution transforming the openFDA drug shortage records via PostgreSQL into an interactive Power BI dashboard. It evaluates clinical specialty risk exposure and analyzes supply chain aging, velocity, and chronic market deficits to empower proactive, data-driven hospital procurement and planning.
